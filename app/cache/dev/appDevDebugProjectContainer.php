@@ -12627,6 +12627,7 @@ class appDevDebugProjectContainer extends Container
             'partkeepr.filesystem.data_directory' => ($this->targetDirs[2].'/../data/'),
             'partkeepr.cronjob.check' => true,
             'partkeepr.octopart.apikey' => '',
+            'partkeepr.octopart.limit' => '',
             'partkeepr.patreon.statusuri' => 'https://www.partkeepr.org/patreon.json',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
