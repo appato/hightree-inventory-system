@@ -49,7 +49,6 @@ class ManyToOneConfiguration extends Configuration
     {
         if (!property_exists($importConfiguration, "importBehaviour")) {
             return false;
-
             throw new \Exception("The key importBehaviour does not exist!");
         }
 
@@ -78,10 +77,8 @@ class ManyToOneConfiguration extends Configuration
                 }
 
                 foreach ($importConfiguration->matchers as $matcher) {
-                    if (!property_exists($matcher, "matchField") || !property_exists(
-                        $matcher,
-                        "importField"
-                    ) || $matcher->importField === ""
+                    if (!property_exists($matcher, "matchField") || !property_exists($matcher,
+                            "importField") || $matcher->importField === ""
                     ) {
                         throw new \Exception("matcher configuration error");
                     }

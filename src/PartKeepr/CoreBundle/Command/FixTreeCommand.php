@@ -3,6 +3,8 @@
 namespace PartKeepr\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use PartKeepr\CategoryBundle\Entity\CategoryPathInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -138,4 +140,6 @@ class FixTreeCommand extends ContainerAwareCommand
 
         return $this->entityManager->getConnection()->fetchAssoc($qb->getSQL(), [':nodeid' => $id])['level'];
     }
+
+
 }

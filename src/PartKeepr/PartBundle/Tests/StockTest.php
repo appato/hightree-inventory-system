@@ -32,10 +32,8 @@ class StockTest extends WebTestCase
         /**
          * @var Query
          */
-        $query = $this->getContainer()->get('doctrine')->getManager()->createQuery('SELECT p.stockLevel FROM PartKeeprPartBundle:Part p WHERE p.id = :id')->setParameter(
-            'id',
-            $part->getId()
-        );
+        $query = $this->getContainer()->get('doctrine')->getManager()->createQuery('SELECT p.stockLevel FROM PartKeeprPartBundle:Part p WHERE p.id = :id')->setParameter('id',
+            $part->getId());
 
         return $query->getSingleScalarResult();
     }

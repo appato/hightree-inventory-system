@@ -63,12 +63,8 @@ abstract class FileController extends Controller
             );
         } catch (FileNotFound $e) {
             $this->get('logger')->addError(
-                sprintf(
-                    'File %s not found in storage %s',
-                    $file->getFullFilename(),
-                    $file->getType()
-                )
-            );
+                sprintf('File %s not found in storage %s', $file->getFullFilename(),
+                $file->getType()));
 
             return new Response(
                 '404 File not found',

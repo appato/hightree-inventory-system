@@ -3,10 +3,11 @@
  * Created by PhpStorm.
  * User: felicitus
  * Date: 10/25/17
- * Time: 5:38 PM.
+ * Time: 5:38 PM
  */
 
 namespace PartKeepr\DoctrineReflectionBundle\Services;
+
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -18,10 +19,12 @@ class DeletionService
      */
     private $em;
 
+
     public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
     }
+
 
     public function findUndeletableUsages($entity)
     {
@@ -48,13 +51,13 @@ class DeletionService
 
                     $qb = $this->em->createQueryBuilder();
                     $qb->select("q")->from($associationMapping["sourceEntity"], "q")->where(
-                        $qb->expr()->eq("q.".$associationMapping["fieldName"], ":query")
+                        $qb->expr()->eq("q." . $associationMapping["fieldName"], ":query")
                     );
 
                     $qb->setParameter(":query", $entity);
 
                     foreach ($qb->getQuery()->getResult() as $result) {
-                        $usedIn[] = (string) $result;
+                        $usedIn[] = (string)$result;
                     }
                 }
             }
@@ -65,7 +68,6 @@ class DeletionService
 
     /**
      * @param $className
-     *
      * @return ClassMetadata|null
      */
     protected function getAllMetadataInfoFor($className)

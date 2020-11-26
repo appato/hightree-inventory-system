@@ -23,8 +23,7 @@ class UserPreferenceNotFoundException extends TranslatableException
 
     public function getMessageKey()
     {
-        return sprintf(
-            'The requested user preference %s was not found for user %s',
+        return sprintf('The requested user preference %s was not found for user %s',
             $this->key,
             $this->user->getUsername()
         );

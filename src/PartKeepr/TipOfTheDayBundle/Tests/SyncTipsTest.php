@@ -19,9 +19,6 @@ class SyncTipsTest extends WebTestCase
 
         $query = $this->getContainer()->get('doctrine.orm.entity_manager')->createQuery($dql);
 
-        //$this->assertGreaterThan(1, $query->getSingleScalarResult());
-        $this->markTestSkipped(
-            'Synchronization of the tips of the day (PartKeepr\TipOfTheDayBundle\Tests\SyncTipsTest) skipped'
-        );
+        $this->assertGreaterThan(1, $query->getSingleScalarResult());
     }
 }

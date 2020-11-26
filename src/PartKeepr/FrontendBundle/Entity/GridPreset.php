@@ -47,17 +47,17 @@ class GridPreset extends BaseEntity
     private $configuration;
 
     /**
-     * Defines if the selected grid preset is the default.
+     * Defines if the selected grid preset is the default
      *
      * @ORM\Column(type="boolean")
      * @Groups({"default"})
      *
-     * @var bool
+     * @var boolean
      */
     private $gridDefault = false;
 
     /**
-     * @return bool True if the given preset is the default
+     * @return boolean True if the given preset is the default
      */
     public function isGridDefault()
     {

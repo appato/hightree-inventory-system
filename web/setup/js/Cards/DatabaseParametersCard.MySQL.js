@@ -23,8 +23,10 @@ Ext.define('PartKeeprSetup.DatabaseParametersCard.MySQL', {
     initComponent: function ()
     {
         this.createHintTemplate = Ext.create("Ext.Template", [
-            "CREATE DATABASE {name} CHARACTER SET UTF8;\nGRANT USAGE ON *.* TO {user}@{localhost} IDENTIFIED BY '{password}';\nGRANT ALL PRIVILEGES ON {name}.* TO {user}@{localhost};"
+            "<code>CREATE DATABASE {name} CHARACTER SET UTF8;<br/>GRANT USAGE ON *.* TO {user}@{localhost} IDENTIFIED BY '{password}';<br/>GRANT ALL PRIVILEGES ON {name}.* TO {user}@{localhost};<br/><br/>"
         ]);
+
+        this.masterTemplate = Ext.create("Ext.Template", ["The database must be manually created prior installation."]);
 
         this.hostname = Ext.create("Ext.form.field.Text", {
             fieldLabel: 'Database Hostname',
@@ -143,16 +145,6 @@ Ext.define('PartKeeprSetup.DatabaseParametersCard.MySQL', {
                 items: [
                     this.showHintCheckbox,
                     {
-                        xtype: 'textarea',
-                        border: false,
-                        width: "450px",
-                        height: "100px",
-                        autoScroll: true,
-                        layout: 'fit',
-                        hidden: true,
-                        id: 'mysql-parameters-hint'
-                    },
-                    {
                         xtype: 'container',
                         border: false,
                         style: 'overflow: auto;',
@@ -160,7 +152,8 @@ Ext.define('PartKeeprSetup.DatabaseParametersCard.MySQL', {
                         height: "100px",
                         autoScroll: true,
                         layout: 'fit',
-                        html: "The database must be manually created prior installation."
+                        id: 'mysql-parameters-hint',
+                        html: "&nbsp"
                     }
                 ]
             }
@@ -204,18 +197,16 @@ Ext.define('PartKeeprSetup.DatabaseParametersCard.MySQL', {
                 host = "&lt;YOUR-CONNECTING-IP&gt;";
             }
 
-            Ext.getCmp("mysql-parameters-hint").show();
-
-            Ext.getCmp("mysql-parameters-hint").setValue(
-                this.createHintTemplate.apply(
-                    {
+            this.createHintTemplate.overwrite(Ext.getCmp("mysql-parameters-hint").getEl(), {
                 localhost: host,
                 user: this.username.getValue(),
                 password: this.password.getValue(),
                 name: this.databaseName.getValue()
-            }));
+            });
+
+            this.masterTemplate.append(Ext.getCmp("mysql-parameters-hint").getEl());
         } else {
-            Ext.getCmp("mysql-parameters-hint").hide();
+            this.masterTemplate.overwrite(Ext.getCmp("mysql-parameters-hint").getEl());
         }
 
         if (this.hostname.getValue() !== "" && this.username.getValue() !== "" && this.password.getValue() !== "" &&

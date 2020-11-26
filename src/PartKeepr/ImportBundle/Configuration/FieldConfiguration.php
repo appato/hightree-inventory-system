@@ -39,7 +39,6 @@ class FieldConfiguration extends BaseConfiguration
     {
         if (!property_exists($configuration, "fieldConfiguration")) {
             return false;
-
             throw new \Exception("The key fieldConfiguration does not exist!");
         }
 

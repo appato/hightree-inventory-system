@@ -38,7 +38,7 @@ class DefaultController extends FOSRestController
      */
     public function getPartsByQueryAction(Request $request)
     {
-        $start = 1;
+        $start = 0;
 
         $responseData = [];
 
@@ -50,27 +50,20 @@ class DefaultController extends FOSRestController
 
         $data = $this->get("partkeepr.octopart_service")->getPartyByQuery($query, $start);
 
-        $errors = $data["errors"];
-        $data = $data["data"]["search"];
-
         $responseData["hits"] = $data["hits"];
         $responseData["results"] = [];
-        $responseData["errors"] = $errors;
 
-        if ($data) {
-            foreach ($data["results"] as $result) {
-                $part = $result["part"];
-                $responseItem = [];
-                $responseItem["mpn"] = $part["mpn"];
-                $responseItem["title"] = $part["short_description"];
-                $responseItem["manufacturer"] = $part["manufacturer"]["name"];
-                $responseItem["numOffers"] = count($part["sellers"]);
-                $responseItem["numSpecs"] = count($part["specs"]);
-                $responseItem["numDatasheets"] = count($part["document_collections"]);
-                $responseItem["url"] = "https://octopart.com".$part["slug"];
-                $responseItem["uid"] = $part["id"];
-                $responseData["results"][] = $responseItem;
-            }
+        foreach ($data["results"] as $result) {
+            $responseItem = [];
+            $responseItem["mpn"] = $result["item"]["mpn"];
+            $responseItem["title"] = $result["snippet"];
+            $responseItem["manufacturer"] = $result["item"]["manufacturer"]["name"];
+            $responseItem["numOffers"] = count($result["item"]["offers"]);
+            $responseItem["numSpecs"] = count($result["item"]["specs"]);
+            $responseItem["numDatasheets"] = count($result["item"]["datasheets"]);
+            $responseItem["url"] = $result["item"]["octopart_url"];
+            $responseItem["uid"] = $result["item"]["uid"];
+            $responseData["results"][] = $responseItem;
         }
 
         return $responseData;
