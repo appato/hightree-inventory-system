@@ -372,7 +372,6 @@
     <parameter key="partkeepr.filesystem.data_directory">/tmp/partkeepr-build/PartKeepr/app/../data/</parameter>
     <parameter key="partkeepr.cronjob.check">true</parameter>
     <parameter key="partkeepr.octopart.apikey"></parameter>
-    <parameter key="partkeepr.octopart.limit"></parameter>
     <parameter key="partkeepr.patreon.statusuri">https://www.partkeepr.org/patreon.json</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
